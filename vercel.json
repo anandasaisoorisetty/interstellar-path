@@ -2,7 +2,7 @@
   "version": 2,
   "public": "dist/interstellar-path/browser",
   "cleanUrls": true,
-  "routes": [
-    { "src": "/(.*)", "dest": "/index.html" }
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
