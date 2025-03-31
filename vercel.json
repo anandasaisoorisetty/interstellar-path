@@ -5,9 +5,5 @@
       "src": "angular.json",
       "use": "@vercel/static"
     }
-  ],
-  "scripts": {
-    "install": "npm install",
-    "build": "ng build --configuration=production"
-  }
+  ]
 }
