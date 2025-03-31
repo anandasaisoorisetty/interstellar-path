@@ -193,7 +193,7 @@ canvas {
 }
 
 .moon-icon {
-  background: url('/moon_icon.png') no-repeat center;
+  background: url('../../assets/moon_icon.png') no-repeat center;
   background-size: contain;
 }
 
