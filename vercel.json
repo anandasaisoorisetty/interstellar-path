@@ -1,8 +1,15 @@
 {
   "version": 2,
-  "public": "dist/interstellar-path/browser",
-  "cleanUrls": true,
+  "builds": [
+    {
+      "src": "dist/interstellar-path/browser/**",
+      "use": "@vercel/static"
+    }
+  ],
   "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
+    {
+      "source": "/public/:path*",
+      "destination": "/public/:path*"
+    }
   ]
 }
