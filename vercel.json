@@ -1,16 +1,8 @@
 {
   "version": 2,
   "public": "dist/interstellar-path/browser",
-  "builds": [
-    {
-      "src": "dist/interstellar-path/browser/**",
-      "use": "@vercel/static"
-    }
-  ],
+  "cleanUrls": true,
   "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
-    }
+    { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
