@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve", 
     "build": "ng build",
+    "postbuild": "cp -r public dist/interstellar-path/browser/public",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
 
