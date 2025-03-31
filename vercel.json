@@ -1,12 +1,9 @@
 {
   "version": 2,
+  "public": "dist",
   "builds": [
     {
-      "src": "angular.json",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "dist/interstellar-path/**",
+      "src": "dist/**",
       "use": "@vercel/static"
     }
   ],
