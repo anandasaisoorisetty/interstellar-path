@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "angular.json",
+      "use": "@vercel/static"
+    }
+  ],
+  "scripts": {
+    "install": "npm install",
+    "build": "ng build --configuration=production"
+  }
+}

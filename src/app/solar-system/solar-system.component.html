@@ -28,7 +28,7 @@
     <div class="dropdown">
       <label for="focusTarget">Focus Target:</label>
       <select id="focusTarget" [(ngModel)]="focusTarget" (change)="focusOnTarget()">
-        <option value="Solar System">Solar System</option>
+        <option value="Interstellar Path">Interstellar Path</option>
         <option value="Sun">Sun</option>
         <option value="Moon">Moon</option>
         <optgroup label="Planets">
@@ -45,6 +45,54 @@
     </div>
     <div class="footer">
       Created by <a href="https://anandasaisoorisetty.github.io" target="_blank" class="creator">Ananda Sai Soorisetty</a>
+    </div>
+  </div>
+  <div class="info-box" [class.visible]="isInfoBoxVisible" *ngIf="selectedTargetDetails">
+    <button class="close-btn" (click)="closeInfoBox()">✖</button>
+    <div class="info-content">
+      <h2>{{ selectedTargetDetails.general.name }} Details</h2>
+      <div class="info-section">
+        <h3>General Information</h3>
+        <p><strong>Name:</strong> {{ selectedTargetDetails.general.name }}</p>
+        <p><strong>Type:</strong> {{ selectedTargetDetails.general.type }}</p>
+        <p><strong>Classification:</strong> {{ selectedTargetDetails.general.classification }}</p>
+      </div>
+      <div class="info-section">
+        <h3>Physical Characteristics</h3>
+        <p><strong>Diameter:</strong> {{ selectedTargetDetails.physical.diameter }}</p>
+        <p><strong>Mass:</strong> {{ selectedTargetDetails.physical.mass }}</p>
+        <p><strong>Volume:</strong> {{ selectedTargetDetails.physical.volume || 'N/A' }}</p>
+        <p><strong>Density:</strong> {{ selectedTargetDetails.physical.density }}</p>
+        <p><strong>Surface Gravity:</strong> {{ selectedTargetDetails.physical.surfaceGravity }}</p>
+      </div>
+      <div class="info-section">
+        <h3>Orbital Characteristics</h3>
+        <p><strong>Distance from Sun:</strong> {{ selectedTargetDetails.orbital.distanceFromSun }}</p>
+        <p><strong>Distance from Earth:</strong> {{ selectedTargetDetails.orbital.distanceFromEarth }}</p>
+        <p><strong>Orbital Period:</strong> {{ selectedTargetDetails.orbital.orbitalPeriod }}</p>
+        <p><strong>Rotation Period:</strong> {{ selectedTargetDetails.orbital.rotationPeriod }}</p>
+        <p><strong>Axial Tilt:</strong> {{ selectedTargetDetails.orbital.axialTilt || 'N/A' }}</p>
+        <p><strong>Orbital Inclination:</strong> {{ selectedTargetDetails.orbital.orbitalInclination || 'N/A' }}</p>
+        <p><strong>Eccentricity:</strong> {{ selectedTargetDetails.orbital.eccentricity || 'N/A' }}</p>
+      </div>
+      <div class="info-section" *ngIf="selectedTargetDetails.atmosphere">
+        <h3>Atmospheric Composition</h3>
+        <p><strong>Main Gases:</strong> {{ selectedTargetDetails.atmosphere.mainGases }}</p>
+        <p><strong>Atmospheric Pressure:</strong> {{ selectedTargetDetails.atmosphere.atmosphericPressure || 'N/A' }}</p>
+      </div>
+      <div class="info-section">
+        <h3>Temperature</h3>
+        <p><strong>Average:</strong> {{ selectedTargetDetails.temperature.average || 'N/A' }}</p>
+        <p><strong>Minimum:</strong> {{ selectedTargetDetails.temperature.minimum }}</p>
+        <p><strong>Maximum:</strong> {{ selectedTargetDetails.temperature.maximum }}</p>
+      </div>
+      <div class="info-section">
+        <h3>Other Features</h3>
+        <p><strong>Number of Moons:</strong> {{ selectedTargetDetails.other.numberOfMoons }}</p>
+        <p><strong>Rings:</strong> {{ selectedTargetDetails.other.rings }}</p>
+        <p><strong>Magnetic Field:</strong> {{ selectedTargetDetails.other.magneticField }}</p>
+        <p><strong>Notable Features:</strong> {{ selectedTargetDetails.other.notableFeatures }}</p>
+      </div>
     </div>
   </div>
 }

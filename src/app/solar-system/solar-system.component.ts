@@ -40,15 +40,100 @@ export class SolarSystemComponent implements AfterViewInit {
   private sunLight!: THREE.PointLight;
   showOrbits = true;
   showMoons = true;
-  focusTarget = 'Solar System';
+  focusTarget = 'Interstellar Path';
   isLoaded = false;
   progress = 0;
   isControlBoxVisible = false;
-  private screenWidth: number = 0; // Track screen width
+  isInfoBoxVisible = false;
+  selectedTargetDetails: any = null;
+  private screenWidth: number = 0;
+
+  private targetDetails: { [key: string]: any } = {
+    'Sun': {
+      general: { name: 'Sun', type: 'Star', classification: 'G-type main-sequence star (G2V)' },
+      physical: { diameter: '1,391,000 km', mass: '1.989 × 10³⁰ kg', volume: '1.41 × 10¹⁸ km³', density: '1.41 g/cm³', surfaceGravity: '274 m/s²' },
+      orbital: { distanceFromSun: '0 km', distanceFromEarth: '~149.6 million km (1 AU)', orbitalPeriod: 'N/A', rotationPeriod: '~25 days (equator), ~35 days (poles)', axialTilt: 'N/A', orbitalInclination: 'N/A', eccentricity: 'N/A' },
+      atmosphere: { mainGases: 'Hydrogen, Helium', atmosphericPressure: 'N/A' },
+      temperature: { average: '~5,500°C (Photosphere)', minimum: 'N/A', maximum: '~15 million°C (Core)' },
+      other: { numberOfMoons: '0', rings: 'No', magneticField: 'Yes', notableFeatures: 'Solar Flares, Sunspots, Corona' }
+    },
+    'Moon': {
+      general: { name: 'Moon', type: 'Natural Satellite', classification: 'Natural Satellite' },
+      physical: { diameter: '3,474 km', mass: '7.35 × 10²² kg', volume: '2.2 × 10¹⁰ km³', density: '3.34 g/cm³', surfaceGravity: '1.62 m/s²' },
+      orbital: { distanceFromSun: '~149.6 million km (via Earth)', distanceFromEarth: '~384,400 km', orbitalPeriod: '27.3 days', rotationPeriod: '27.3 days (Synchronous)', axialTilt: 'N/A', orbitalInclination: 'N/A', eccentricity: 'N/A' },
+      atmosphere: { mainGases: 'Very thin (Exosphere)', atmosphericPressure: 'Negligible' },
+      temperature: { average: 'N/A', minimum: '-173°C', maximum: '127°C' },
+      other: { numberOfMoons: 'N/A', rings: 'No', magneticField: 'No', notableFeatures: 'Craters, Maria, Highlands' }
+    },
+    'Mercury': {
+      general: { name: 'Mercury', type: 'Planet', classification: 'Terrestrial' },
+      physical: { diameter: '4,880 km', mass: '3.3 × 10²³ kg', volume: 'N/A', density: '5.43 g/cm³', surfaceGravity: '3.7 m/s²' },
+      orbital: { distanceFromSun: '~57.9 million km (0.39 AU)', distanceFromEarth: 'N/A', orbitalPeriod: '88 days', rotationPeriod: '59 days', axialTilt: 'N/A', orbitalInclination: 'N/A', eccentricity: 'N/A' },
+      atmosphere: { mainGases: 'Very thin (Oxygen, Sodium, Hydrogen)', atmosphericPressure: 'Negligible' },
+      temperature: { average: 'N/A', minimum: '-173°C', maximum: '427°C' },
+      other: { numberOfMoons: '0', rings: 'No', magneticField: 'Weak', notableFeatures: 'Large Impact Craters, Cliffs' }
+    },
+    'Venus': {
+      general: { name: 'Venus', type: 'Planet', classification: 'Terrestrial' },
+      physical: { diameter: '12,104 km', mass: '4.87 × 10²⁴ kg', volume: 'N/A', density: '5.24 g/cm³', surfaceGravity: '8.87 m/s²' },
+      orbital: { distanceFromSun: '~108.2 million km (0.72 AU)', distanceFromEarth: 'N/A', orbitalPeriod: '225 days', rotationPeriod: '243 days (Retrograde)', axialTilt: 'N/A', orbitalInclination: 'N/A', eccentricity: 'N/A' },
+      atmosphere: { mainGases: 'Thick (Carbon Dioxide, Nitrogen)', atmosphericPressure: 'N/A' },
+      temperature: { average: '~462°C', minimum: 'N/A', maximum: 'N/A' },
+      other: { numberOfMoons: '0', rings: 'No', magneticField: 'No', notableFeatures: 'Volcanic Plains, Thick Clouds of Sulfuric Acid' }
+    },
+    'Earth': {
+      general: { name: 'Earth', type: 'Planet', classification: 'Terrestrial' },
+      physical: { diameter: '12,742 km', mass: '5.97 × 10²⁴ kg', volume: 'N/A', density: '5.51 g/cm³', surfaceGravity: '9.8 m/s²' },
+      orbital: { distanceFromSun: '~149.6 million km (1 AU)', distanceFromEarth: '0 km', orbitalPeriod: '365.25 days', rotationPeriod: '24 hours', axialTilt: 'N/A', orbitalInclination: 'N/A', eccentricity: 'N/A' },
+      atmosphere: { mainGases: 'Nitrogen, Oxygen, Argon', atmosphericPressure: '1 bar' },
+      temperature: { average: '~15°C', minimum: '-88°C', maximum: '58°C' },
+      other: { numberOfMoons: '1', rings: 'No', magneticField: 'Yes', notableFeatures: 'Liquid Water, Magnetic Field, Life' }
+    },
+    'Mars': {
+      general: { name: 'Mars', type: 'Planet', classification: 'Ter znaczeniarestrial' },
+      physical: { diameter: '6,779 km', mass: '6.42 × 10²³ kg', volume: 'N/A', density: '3.93 g/cm³', surfaceGravity: '3.71 m/s²' },
+      orbital: { distanceFromSun: '~227.9 million km (1.52 AU)', distanceFromEarth: 'N/A', orbitalPeriod: '687 days', rotationPeriod: '24.6 hours', axialTilt: 'N/A', orbitalInclination: 'N/A', eccentricity: 'N/A' },
+      atmosphere: { mainGases: 'Thin (Carbon Dioxide, Nitrogen, Argon)', atmosphericPressure: 'N/A' },
+      temperature: { average: 'N/A', minimum: '-140°C', maximum: '30°C' },
+      other: { numberOfMoons: '2 (Phobos, Deimos)', rings: 'No', magneticField: 'No', notableFeatures: 'Olympus Mons, Valles Marineris' }
+    },
+    'Jupiter': {
+      general: { name: 'Jupiter', type: 'Planet', classification: 'Gas Giant' },
+      physical: { diameter: '139,820 km', mass: '1.9 × 10²⁷ kg', volume: 'N/A', density: '1.33 g/cm³', surfaceGravity: '24.79 m/s²' },
+      orbital: { distanceFromSun: '~778.3 million km (5.2 AU)', distanceFromEarth: 'N/A', orbitalPeriod: '11.86 years', rotationPeriod: '9.9 hours', axialTilt: 'N/A', orbitalInclination: 'N/A', eccentricity: 'N/A' },
+      atmosphere: { mainGases: 'Hydrogen, Helium', atmosphericPressure: 'N/A' },
+      temperature: { average: '-108°C', minimum: 'N/A', maximum: 'N/A' },
+      other: { numberOfMoons: '95+ (Io, Europa, Ganymede, Callisto)', rings: 'Yes (Faint)', magneticField: 'Yes (Strongest)', notableFeatures: 'Great Red Spot' }
+    },
+    'Saturn': {
+      general: { name: 'Saturn', type: 'Planet', classification: 'Gas Giant' },
+      physical: { diameter: '116,460 km', mass: '5.68 × 10²⁶ kg', volume: 'N/A', density: '0.69 g/cm³', surfaceGravity: '10.44 m/s²' },
+      orbital: { distanceFromSun: '~1.43 billion km (9.5 AU)', distanceFromEarth: 'N/A', orbitalPeriod: '29.5 years', rotationPeriod: '10.7 hours', axialTilt: 'N/A', orbitalInclination: 'N/A', eccentricity: 'N/A' },
+      atmosphere: { mainGases: 'Hydrogen, Helium', atmosphericPressure: 'N/A' },
+      temperature: { average: '-139°C', minimum: 'N/A', maximum: 'N/A' },
+      other: { numberOfMoons: '146+ (Titan, Enceladus)', rings: 'Yes (Largest)', magneticField: 'Yes', notableFeatures: 'Largest Ring System' }
+    },
+    'Uranus': {
+      general: { name: 'Uranus', type: 'Planet', classification: 'Ice Giant' },
+      physical: { diameter: '50,724 km', mass: '8.68 × 10²⁵ kg', volume: 'N/A', density: '1.27 g/cm³', surfaceGravity: '8.69 m/s²' },
+      orbital: { distanceFromSun: '~2.87 billion km (19.2 AU)', distanceFromEarth: 'N/A', orbitalPeriod: '84 years', rotationPeriod: '17.2 hours (Tilted at 98°)', axialTilt: '98°', orbitalInclination: 'N/A', eccentricity: 'N/A' },
+      atmosphere: { mainGases: 'Hydrogen, Helium, Methane', atmosphericPressure: 'N/A' },
+      temperature: { average: '-224°C', minimum: 'N/A', maximum: 'N/A' },
+      other: { numberOfMoons: '27+ (Miranda, Titania)', rings: 'Yes (Faint)', magneticField: 'Yes', notableFeatures: 'Rotates on its Side' }
+    },
+    'Neptune': {
+      general: { name: 'Neptune', type: 'Planet', classification: 'Ice Giant' },
+      physical: { diameter: '49,244 km', mass: '1.02 × 10²⁶ kg', volume: 'N/A', density: '1.64 g/cm³', surfaceGravity: '11.15 m/s²' },
+      orbital: { distanceFromSun: '~4.5 billion km (30.1 AU)', distanceFromEarth: 'N/A', orbitalPeriod: '165 years', rotationPeriod: '16 hours', axialTilt: 'N/A', orbitalInclination: 'N/A', eccentricity: 'N/A' },
+      atmosphere: { mainGases: 'Hydrogen, Helium, Methane', atmosphericPressure: 'N/A' },
+      temperature: { average: '-214°C', minimum: 'N/A', maximum: 'N/A' },
+      other: { numberOfMoons: '14+ (Triton)', rings: 'Yes (Faint)', magneticField: 'Yes', notableFeatures: 'Fastest Winds (2,100 km/h), Great Dark Spot' }
+    }
+  };
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {
     if (isPlatformBrowser(this.platformId)) {
-      this.screenWidth = window.innerWidth; // Initialize on construction
+      this.screenWidth = window.innerWidth;
     }
   }
 
@@ -94,7 +179,7 @@ export class SolarSystemComponent implements AfterViewInit {
     const scaleFactor = 500;
 
     const sunGeometry = new THREE.SphereGeometry(5 * scaleFactor, 32, 32);
-    const sunTexture = textureLoader.load('/sun_texture.jpg', () => console.log('Sun texture loaded'), undefined, (err) => console.error('Sun texture error:', err));
+    const sunTexture = textureLoader.load('/sun_texture.jpg');
     const sunMaterial = new THREE.MeshBasicMaterial({ map: sunTexture, color: 0xFFC107 });
     this.sun = new THREE.Mesh(sunGeometry, sunMaterial);
     this.scene.add(this.sun);
@@ -112,7 +197,7 @@ export class SolarSystemComponent implements AfterViewInit {
 
     planetData.forEach(data => {
       const geometry = new THREE.SphereGeometry(data.size, 64, 64);
-      const texture = textureLoader.load(data.texture, () => console.log(`${data.name} texture loaded`), undefined, (err) => console.error(`${data.name} texture error:`, err));
+      const texture = textureLoader.load(data.texture);
       const material = new THREE.MeshPhongMaterial({ map: texture, shininess: 50 });
       const planet = new THREE.Mesh(geometry, material);
       planet.position.set(data.distance, 0, 0);
@@ -143,7 +228,7 @@ export class SolarSystemComponent implements AfterViewInit {
 
     const saturn = this.planets.find(p => p.name === 'Saturn')!.mesh;
     const ringGeometry = new THREE.RingGeometry(0.6 * scaleFactor, 1.2 * scaleFactor, 64);
-    const ringTexture = textureLoader.load('/saturn_rings.png', () => console.log('Saturn rings loaded'), undefined, (err) => console.error('Saturn rings error:', err));
+    const ringTexture = textureLoader.load('/saturn_rings.png');
     const ringMaterial = new THREE.MeshBasicMaterial({ map: ringTexture, side: THREE.DoubleSide, transparent: true });
     const rings = new THREE.Mesh(ringGeometry, ringMaterial);
     rings.rotation.x = Math.PI / 2;
@@ -189,7 +274,7 @@ export class SolarSystemComponent implements AfterViewInit {
   private createMoons(count: number, planetSize: number, textureLoader: THREE.TextureLoader, isEarth: boolean): { mesh: THREE.Mesh; orbitRadius: number; speed: number; radius: number; orbit?: THREE.Line }[] {
     const moons = [];
     if (count > 0) {
-      const moonTexture = textureLoader.load('/moon_texture.jpg', () => console.log('Moon texture loaded'), undefined, (err) => console.error('Moon texture error:', err));
+      const moonTexture = textureLoader.load('/moon_texture.jpg');
       for (let i = 0; i < count; i++) {
         const size = planetSize * 0.15;
         const geometry = new THREE.SphereGeometry(size, 32, 32);
@@ -214,7 +299,6 @@ export class SolarSystemComponent implements AfterViewInit {
   }
 
   private addLighting(): void {
-    console.log('Adding lighting');
     this.sunLight = new THREE.PointLight(0xFFC107, 5, 50000, 1.5);
     this.sunLight.position.set(0, 0, 0);
     this.scene.add(this.sunLight);
@@ -223,16 +307,14 @@ export class SolarSystemComponent implements AfterViewInit {
   }
 
   private addStarfield(): void {
-    console.log('Adding starfield');
     const starGeometry = new THREE.SphereGeometry(25000, 32, 32);
-    const starTexture = new THREE.TextureLoader().load('/starfield_texture.jpg', () => console.log('Starfield loaded'), undefined, (err) => console.error('Starfield error:', err));
+    const starTexture = new THREE.TextureLoader().load('/starfield_texture.jpg');
     const starMaterial = new THREE.MeshBasicMaterial({ map: starTexture, side: THREE.BackSide, opacity: 0.5, transparent: true });
     const starfield = new THREE.Mesh(starGeometry, starMaterial);
     this.scene.add(starfield);
   }
 
   private setupControls(): void {
-    console.log('Setting up controls');
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
     this.controls.enableZoom = true;
     this.controls.enablePan = false;
@@ -257,19 +339,11 @@ export class SolarSystemComponent implements AfterViewInit {
       planet.mesh.rotation.y += 0.02;
 
       if (planet.nameSprite) {
-        planet.nameSprite.position.set(
-          planet.mesh.position.x,
-          planet.mesh.position.y + planet.radius * 1.5,
-          planet.mesh.position.z
-        );
+        planet.nameSprite.position.set(planet.mesh.position.x, planet.mesh.position.y + planet.radius * 1.5, planet.mesh.position.z);
       }
 
       if (planet.sizeSprite) {
-        planet.sizeSprite.position.set(
-          planet.mesh.position.x,
-          planet.mesh.position.y + planet.radius * 2,
-          planet.mesh.position.z
-        );
+        planet.sizeSprite.position.set(planet.mesh.position.x, planet.mesh.position.y + planet.radius * 2, planet.mesh.position.z);
       }
 
       planet.moons.forEach(moon => {
@@ -297,7 +371,6 @@ export class SolarSystemComponent implements AfterViewInit {
   }
 
   toggleOrbits(): void {
-    console.log('Toggling orbits:', this.showOrbits);
     this.planets.forEach(planet => {
       if (planet.orbit) planet.orbit.visible = this.showOrbits;
       planet.moons.forEach(moon => {
@@ -307,7 +380,6 @@ export class SolarSystemComponent implements AfterViewInit {
   }
 
   toggleMoons(): void {
-    console.log('Toggling moons:', this.showMoons);
     this.planets.forEach(planet => {
       planet.moons.forEach(moon => {
         moon.mesh.visible = this.showMoons;
@@ -317,48 +389,57 @@ export class SolarSystemComponent implements AfterViewInit {
   }
 
   focusOnTarget(): void {
-    console.log('Focusing on:', this.focusTarget);
     this.planets.forEach(planet => {
       if (planet.nameSprite) planet.nameSprite.visible = true;
       if (planet.sizeSprite) planet.sizeSprite.visible = true;
     });
 
-    if (this.focusTarget === 'Solar System') {
+    if (this.focusTarget === 'Interstellar Path') {
+      this.isInfoBoxVisible = false;
       this.controls.target.set(0, 0, 0);
       this.camera.position.set(0, 75000, 150000);
-      console.log('Set to Solar System view');
     } else if (this.focusTarget === 'Sun') {
+      this.isInfoBoxVisible = true;
+      this.selectedTargetDetails = this.targetDetails['Sun'];
       this.controls.target.copy(this.sun.position);
       this.camera.position.set(this.sun.position.x, this.sun.position.y + 2500, this.sun.position.z + 3750);
-      console.log('Set to Sun view');
     } else if (this.focusTarget === 'Moon') {
       const earth = this.planets.find(p => p.name === 'Earth');
       if (earth && earth.moons.length > 0) {
         const moon = earth.moons[0];
+        this.isInfoBoxVisible = true;
+        this.selectedTargetDetails = this.targetDetails['Moon'];
         this.controls.target.copy(moon.mesh.position);
         this.camera.position.set(moon.mesh.position.x, moon.mesh.position.y + moon.radius * 2, moon.mesh.position.z + moon.radius * 5);
         if (earth.nameSprite) earth.nameSprite.visible = false;
         if (earth.sizeSprite) earth.sizeSprite.visible = false;
-        console.log('Set to Moon view');
       }
     } else {
       const planet = this.planets.find(p => p.name === this.focusTarget);
       if (planet) {
+        this.isInfoBoxVisible = true;
+        this.selectedTargetDetails = this.targetDetails[planet.name];
         this.controls.target.copy(planet.mesh.position);
         this.camera.position.set(planet.mesh.position.x, planet.mesh.position.y + planet.radius * 2, planet.mesh.position.z + planet.radius * 5);
         if (planet.nameSprite) planet.nameSprite.visible = false;
         if (planet.sizeSprite) planet.sizeSprite.visible = false;
-        console.log('New camera position:', this.camera.position);
-      } else {
-        console.error('Planet not found:', this.focusTarget);
       }
     }
+
+    // Auto-close control box on smaller screens
+    if (!this.isDesktop()) {
+      this.isControlBoxVisible = false;
+    }
+
     this.controls.update();
   }
 
   toggleControlBox(): void {
     this.isControlBoxVisible = !this.isControlBoxVisible;
-    console.log('Control box toggled:', this.isControlBoxVisible);
+  }
+
+  closeInfoBox(): void {
+    this.isInfoBoxVisible = false;
   }
 
   isDesktop(): boolean {
@@ -368,7 +449,7 @@ export class SolarSystemComponent implements AfterViewInit {
   @HostListener('window:resize')
   onResize(): void {
     if (isPlatformBrowser(this.platformId)) {
-      this.screenWidth = window.innerWidth; // Update screen width on resize
+      this.screenWidth = window.innerWidth;
       this.camera.aspect = window.innerWidth / window.innerHeight;
       this.camera.updateProjectionMatrix();
       this.renderer.setSize(window.innerWidth, window.innerHeight, false);
