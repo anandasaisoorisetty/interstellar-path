@@ -1,9 +1,9 @@
 {
   "version": 2,
-  "public": "dist",
+  "public": "dist/interstellar-path/browser",
   "builds": [
     {
-      "src": "dist/**",
+      "src": "dist/interstellar-path/browser/**",
       "use": "@vercel/static"
     }
   ],
