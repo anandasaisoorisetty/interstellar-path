@@ -1,0 +1,50 @@
+@if (!isLoaded) {
+  <div class="preloader">
+    <div class="preloader-text">
+      <h4>Welcome to</h4>
+      <h1>Interstellar Path</h1>
+      <div class="progress-bar">
+        <div class="progress" [style.width]="progress + '%'">{{ progress }}%</div>
+      </div>
+    </div>
+  </div>
+}
+<canvas #solarCanvas></canvas>
+@if (isLoaded) {
+  <button class="toggle-btn" (click)="toggleControlBox()" [class.hidden]="isControlBoxVisible && isDesktop()">☰</button>
+  <div class="control-box" [class.visible]="isControlBoxVisible">
+    <h2>Interstellar Path</h2>
+    <button class="close-btn" (click)="toggleControlBox()" *ngIf="isDesktop()">✖</button>
+    <div class="checkboxes">
+      <label class="checkbox-inline">
+        <input type="checkbox" [(ngModel)]="showOrbits" (change)="toggleOrbits()" checked>
+        <span class="icon circle-icon"></span> Orbital Paths
+      </label>
+      <label class="checkbox-inline">
+        <input type="checkbox" [(ngModel)]="showMoons" (change)="toggleMoons()" checked>
+        <span class="icon moon-icon"></span> Moons
+      </label>
+    </div>
+    <div class="dropdown">
+      <label for="focusTarget">Focus Target:</label>
+      <select id="focusTarget" [(ngModel)]="focusTarget" (change)="focusOnTarget()">
+        <option value="Solar System">Solar System</option>
+        <option value="Sun">Sun</option>
+        <option value="Moon">Moon</option>
+        <optgroup label="Planets">
+          <option value="Mercury">Mercury</option>
+          <option value="Venus">Venus</option>
+          <option value="Earth">Earth</option>
+          <option value="Mars">Mars</option>
+          <option value="Jupiter">Jupiter</option>
+          <option value="Saturn">Saturn</option>
+          <option value="Uranus">Uranus</option>
+          <option value="Neptune">Neptune</option>
+        </optgroup>
+      </select>
+    </div>
+    <div class="footer">
+      Created by <a href="https://anandasaisoorisetty.github.io" target="_blank" class="creator">Ananda Sai Soorisetty</a>
+    </div>
+  </div>
+}

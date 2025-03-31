@@ -1,11 +1,16 @@
 import { Component } from '@angular/core';
+import { SolarSystemComponent } from './solar-system/solar-system.component';
 
 @Component({
   selector: 'app-root',
-  imports: [],
+  standalone: true,
+  imports: [SolarSystemComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
+
 export class AppComponent {
   title = 'solar-system';
 }
+
+
