@@ -21,11 +21,13 @@
             "assets": [
               {
                 "glob": "**/*",
-                "input": "public"
+                "input": "public",
+                "output": "/assets/"
               }
             ],
-            "styles": ["src/styles.css"]
-
+            "styles": ["src/styles.css"],
+            "scripts": [],
+            "baseHref": "/"
           },
           "configurations": {
             "production": {
@@ -74,10 +76,12 @@
             "assets": [
               {
                 "glob": "**/*",
-                "input": "public"
+                "input": "public",
+                "output": "/assets/"
               }
             ],
-            "styles": ["src/styles.css"]
+            "styles": ["src/styles.css"],
+            "scripts": []
           }
         }
       }
@@ -86,5 +90,4 @@
   "cli": {
     "analytics": "f99e7dd4-12a2-4544-bdbd-c30f71ccf033"
   }
-
 }

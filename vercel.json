@@ -4,6 +4,16 @@
     {
       "src": "angular.json",
       "use": "@vercel/static"
+    },
+    {
+      "src": "dist/interstellar-path/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
     }
   ]
 }
