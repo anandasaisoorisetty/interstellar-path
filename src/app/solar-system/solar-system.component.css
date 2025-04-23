@@ -23,13 +23,6 @@
   margin-top: 20px;
 }
 
-@media (max-width: 768px) {
-  .progress-bar {
-    width: 80%;
-    left: 10%;
-    right: 10%;
-  }
-}
 
 .progress {
   height: 100%;
@@ -276,6 +269,13 @@ canvas {
     right: 10%;
     padding: 20px;
   }
+
+  .control-box{
+    width: 75%;
+    left: 12.5%;
+    right: 12.5%;
+  }
+  
   .info-box {
     top: 80%;
     height: 180px;
