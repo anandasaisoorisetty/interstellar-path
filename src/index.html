@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <title>Interstellar Path</title>
   <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <!-- Favicon -->
   <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
@@ -15,15 +15,34 @@
   <link rel="icon" type="image/png" sizes="192x192" href="/assets/android-chrome-192x192.png">
   <link rel="icon" type="image/png" sizes="512x512" href="/assets/android-chrome-512x512.png">
   <!-- Manifest -->
-  <link rel="manifest" href="/site.webmanifest">
+  <link rel="manifest" href="/manifest.webmanifest">
   <meta name="theme-color" content="#1976d2">
   <meta name="description" content="Explore our solar system in 3D with Interstellar Path">
+  <!-- iOS -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="Interstellar Path">
+  <!-- Android -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="application-name" content="Interstellar Path">
+  <!-- PWA -->
+  <meta name="format-detection" content="telephone=no">
+  <meta name="msapplication-TileColor" content="#1976d2">
+  <meta name="msapplication-tap-highlight" content="no">
 </head>
 <body>
   <app-root></app-root>
   <noscript>Please enable JavaScript to continue using this application.</noscript>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/ngsw-worker.js').then(registration => {
+          console.log('ServiceWorker registration successful');
+        }).catch(err => {
+          console.log('ServiceWorker registration failed: ', err);
+        });
+      });
+    }
+  </script>
 </body>
 </html>
