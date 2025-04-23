@@ -20,9 +20,18 @@
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets",
               {
-                "glob": "**/*",
+                "glob": "*.webp",
+                "input": "src/assets",
+                "output": "/assets"
+              },
+              {
+                "glob": "*.ico",
+                "input": "src/assets",
+                "output": "/assets"
+              },
+              {
+                "glob": "*.webmanifest",
                 "input": "src/assets",
                 "output": "/assets"
               }
@@ -54,7 +63,23 @@
               ],
               "outputHashing": "all",
               "serviceWorker": true,
-              "ngswConfigPath": "ngsw-config.json"
+              "ngswConfigPath": "ngsw-config.json",
+              "buildOptimizer": true,
+              "optimization": {
+                "scripts": true,
+                "styles": {
+                  "minify": true,
+                  "inlineCritical": true
+                },
+                "fonts": true
+              },
+              "vendorChunk": false,
+              "extractLicenses": true,
+              "sourceMap": false,
+              "namedChunks": false,
+              "aot": true,
+              "extractCss": true,
+              "commonChunk": true
             },
             "development": {
               "buildOptimizer": false,
@@ -70,7 +95,7 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "buildTarget": "interstellar-path:build:development"
+            "buildTarget": "interstellar-path:build:production"
           },
           "configurations": {
             "production": {
@@ -80,7 +105,7 @@
               "buildTarget": "interstellar-path:build:development"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "production"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",

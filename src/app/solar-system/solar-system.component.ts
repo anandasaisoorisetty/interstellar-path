@@ -396,20 +396,20 @@ export class SolarSystemComponent implements AfterViewInit {
     const scaleFactor = 1000;
 
     const sunGeometry = new THREE.SphereGeometry(5 * scaleFactor, 32, 32);
-    const sunTexture = textureLoader.load('/assets/sun_texture.jpg');
+    const sunTexture = textureLoader.load('/assets/sun_texture.webp');
     const sunMaterial = new THREE.MeshBasicMaterial({ map: sunTexture, color: 0xFFC107 });
     this.sun = new THREE.Mesh(sunGeometry, sunMaterial);
     this.scene.add(this.sun);
 
     const planetData = [
-      { name: 'Mercury', size: 0.07 * scaleFactor, realSize: '4879', distance: 15000, speed: 0.001, texture: '/assets/mercury_texture.jpg', moons: 0 },
-      { name: 'Venus', size: 0.174 * scaleFactor, realSize: '12104', distance: 20000, speed: 0.0008, texture: '/assets/venus_texture.jpg', moons: 0 },
-      { name: 'Earth', size: 0.1832 * scaleFactor, realSize: '12742', distance: 25000, speed: 0.0006, texture: '/assets/earth_texture.jpg', moons: 1 },
-      { name: 'Mars', size: 0.0976 * scaleFactor, realSize: '6792', distance: 30000, speed: 0.0005, texture: '/assets/mars_texture.jpg', moons: 0 },
-      { name: 'Jupiter', size: 2.008 * scaleFactor, realSize: '139820', distance: 50000, speed: 0.0003, texture: '/assets/jupiter_texture.jpg', moons: 0 },
-      { name: 'Saturn', size: 1.672 * scaleFactor, realSize: '116460', distance: 70000, speed: 0.0002, texture: '/assets/saturn_texture.jpg', moons: 0 },
-      { name: 'Uranus', size: 0.728 * scaleFactor, realSize: '50724', distance: 90000, speed: 0.00015, texture: '/assets/uranus_texture.jpg', moons: 0 },
-      { name: 'Neptune', size: 0.708 * scaleFactor, realSize: '49244', distance: 110000, speed: 0.0001, texture: '/assets/neptune_texture.jpg', moons: 0 }
+      { name: 'Mercury', size: 0.07 * scaleFactor, realSize: '4879', distance: 15000, speed: 0.001, texture: '/assets/mercury_texture.webp', moons: 0 },
+      { name: 'Venus', size: 0.174 * scaleFactor, realSize: '12104', distance: 20000, speed: 0.0008, texture: '/assets/venus_texture.webp', moons: 0 },
+      { name: 'Earth', size: 0.1832 * scaleFactor, realSize: '12742', distance: 25000, speed: 0.0006, texture: '/assets/earth_texture.webp', moons: 1 },
+      { name: 'Mars', size: 0.0976 * scaleFactor, realSize: '6792', distance: 30000, speed: 0.0005, texture: '/assets/mars_texture.webp', moons: 0 },
+      { name: 'Jupiter', size: 2.008 * scaleFactor, realSize: '139820', distance: 50000, speed: 0.0003, texture: '/assets/jupiter_texture.webp', moons: 0 },
+      { name: 'Saturn', size: 1.672 * scaleFactor, realSize: '116460', distance: 70000, speed: 0.0002, texture: '/assets/saturn_texture.webp', moons: 0 },
+      { name: 'Uranus', size: 0.728 * scaleFactor, realSize: '50724', distance: 90000, speed: 0.00015, texture: '/assets/uranus_texture.webp', moons: 0 },
+      { name: 'Neptune', size: 0.708 * scaleFactor, realSize: '49244', distance: 110000, speed: 0.0001, texture: '/assets/neptune_texture.webp', moons: 0 }
     ];
 
     planetData.forEach(data => {
@@ -484,7 +484,7 @@ export class SolarSystemComponent implements AfterViewInit {
     const outerRadius = saturnRadius * 2.4;
 
     const ringGeometry = new THREE.RingGeometry(innerRadius, outerRadius, 64);
-    const ringTexture = textureLoader.load('/assets/saturn_rings.png');
+    const ringTexture = textureLoader.load('/assets/saturn_rings.webp');
     const ringMaterial = new THREE.MeshBasicMaterial({
       map: ringTexture,
       side: THREE.DoubleSide,
@@ -551,7 +551,7 @@ export class SolarSystemComponent implements AfterViewInit {
   private createMoons(count: number, planetSize: number, textureLoader: THREE.TextureLoader, isEarth: boolean): { mesh: THREE.Mesh; orbitRadius: number; speed: number; radius: number; orbit?: THREE.Line }[] {
     const moons = [];
     if (count > 0) {
-      const moonTexture = textureLoader.load('/assets/moon_texture.jpg');
+      const moonTexture = textureLoader.load('/assets/moon_texture.webp');
       for (let i = 0; i < count; i++) {
         const size = planetSize * 0.15;
         const geometry = new THREE.SphereGeometry(size, 32, 32);
@@ -585,7 +585,7 @@ export class SolarSystemComponent implements AfterViewInit {
 
   private addStarfield(): void {
     const starGeometry = new THREE.SphereGeometry(25000, 32, 32);
-    const starTexture = new THREE.TextureLoader().load('/assets/starfield_texture.jpg');
+    const starTexture = new THREE.TextureLoader().load('/assets/starfield_texture.webp');
     const starMaterial = new THREE.MeshBasicMaterial({ map: starTexture, side: THREE.BackSide, opacity: 0.5, transparent: true });
     const starfield = new THREE.Mesh(starGeometry, starMaterial);
     this.scene.add(starfield);

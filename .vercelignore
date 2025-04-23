@@ -1,0 +1,45 @@
+# Dependencies
+node_modules/
+
+# Source files
+src/
+!src/assets/
+
+# Environment files
+.env
+.env.*
+
+# Documentation
+*.md
+
+# TypeScript files
+*.ts
+!dist/**/*.js
+
+# Configuration files
+angular.json
+package-lock.json
+tsconfig.json
+tsconfig.*.json
+karma.conf.js
+*.spec.ts
+
+# Build output directories
+dist/out-tsc/
+dist/browser/
+dist/server/
+
+# Cache and temporary files
+.cache/
+.temp/
+*.log
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# System files
+.DS_Store
+Thumbs.db

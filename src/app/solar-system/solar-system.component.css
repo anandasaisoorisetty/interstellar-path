@@ -1,7 +1,7 @@
 .preloader {
   position: fixed;
   inset: 0;
-  background: url('/assets/starfield_texture.jpg') no-repeat center/cover;
+  background: url('/assets/starfield_texture.webp') no-repeat center/cover;
   display: flex;
   justify-content: center;
   align-items: center;
