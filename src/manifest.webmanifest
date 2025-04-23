@@ -1,0 +1,27 @@
+{
+  "name": "Interstellar Path",
+  "short_name": "Interstellar Path",
+  "theme_color": "#1976d2",
+  "background_color": "#fafafa",
+  "display": "standalone",
+  "scope": "./",
+  "start_url": "./",
+  "icons": [
+    {
+      "src": "assets/interstellar-path-logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "assets/interstellar-path-logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/interstellar-path-logo.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    }
+  ]
+}

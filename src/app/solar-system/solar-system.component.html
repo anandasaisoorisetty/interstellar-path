@@ -15,48 +15,131 @@
   <div class="control-box" [class.visible]="isControlBoxVisible">
     <h2>Interstellar Path</h2>
     <button class="close-btn" (click)="toggleControlBox()" *ngIf="isDesktop()">✖</button>
-    <div class="checkboxes">
-      <label class="checkbox-inline">
-        <input type="checkbox" [(ngModel)]="showOrbits" (change)="toggleOrbits()" checked>
-        <span class="icon circle-icon"></span> Orbital Paths
-      </label>
-      <label class="checkbox-inline">
-        <input type="checkbox" [(ngModel)]="showMoons" (change)="toggleMoons()" checked>
-        <span class="icon moon-icon"></span> Moons
-      </label>
+
+    <div class="controls-section">
+      <div class="checkboxes">
+        <label class="checkbox-inline">
+          <input type="checkbox" [(ngModel)]="showOrbits" (change)="toggleOrbits()" checked>
+          <span class="icon circle-icon"></span> Orbital Paths
+        </label>
+        <label class="checkbox-inline">
+          <input type="checkbox" [(ngModel)]="showMoons" (change)="toggleMoons()" checked>
+          <span class="icon moon-icon"></span> Moons
+        </label>
+      </div>
+
+      <div class="dropdown">
+        <label for="focusTarget">Focus Target:</label>
+        <select id="focusTarget" [(ngModel)]="focusTarget" (change)="focusOnTarget()">
+          <option value="Interstellar Path">Interstellar Path</option>
+          <option value="Sun">Sun</option>
+          <option value="Moon">Moon</option>
+          <optgroup label="Planets">
+            <option value="Mercury">Mercury</option>
+            <option value="Venus">Venus</option>
+            <option value="Earth">Earth</option>
+            <option value="Mars">Mars</option>
+            <option value="Jupiter">Jupiter</option>
+            <option value="Saturn">Saturn</option>
+            <option value="Uranus">Uranus</option>
+            <option value="Neptune">Neptune</option>
+          </optgroup>
+        </select>
+      </div>
+
+      <button class="calendar-btn" (click)="toggleCalendar()">
+        <svg class="calendar-icon" viewBox="0 0 24 24" width="20" height="20">
+          <path fill="currentColor" d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM5 8V6h14v2H5zm2 4h10v2H7v-2zm0 4h7v2H7v-2z"/>
+        </svg>
+        Calendar
+      </button>
     </div>
-    <div class="dropdown">
-      <label for="focusTarget">Focus Target:</label>
-      <select id="focusTarget" [(ngModel)]="focusTarget" (change)="focusOnTarget()">
-        <option value="Interstellar Path">Interstellar Path</option>
-        <option value="Sun">Sun</option>
-        <option value="Moon">Moon</option>
-        <optgroup label="Planets">
-          <option value="Mercury">Mercury</option>
-          <option value="Venus">Venus</option>
-          <option value="Earth">Earth</option>
-          <option value="Mars">Mars</option>
-          <option value="Jupiter">Jupiter</option>
-          <option value="Saturn">Saturn</option>
-          <option value="Uranus">Uranus</option>
-          <option value="Neptune">Neptune</option>
-        </optgroup>
-      </select>
-    </div>
-    <div class="footer">
-      Created by <a href="https://anandasaisoorisetty.github.io" target="_blank" class="creator">Ananda Sai Soorisetty</a>
+
+    <div class="scrollable-section">
+      <div class="footer">
+        Created by <a href="https://anandasaisoorisetty.github.io" target="_blank" class="creator">Ananda Sai Soorisetty</a>
+      </div>
     </div>
   </div>
-  <div class="info-box" [class.visible]="isInfoBoxVisible" *ngIf="selectedTargetDetails">
+
+  <!-- Calendar Card -->
+  <div class="calendar-card" [class.visible]="isCalendarVisible">
+    <button class="close-btn" (click)="toggleCalendar()">✖</button>
+    <h2>Calendar Information</h2>
+
+    <div class="calendar-content">
+      <div class="date-time-section">
+        <h3>Current Date & Time</h3>
+        <p>{{ currentDate | date:'fullDate' }} {{ getCurrentTime() }}</p>
+      </div>
+
+      <div class="indian-calendar">
+        <h3>Indian Calendar</h3>
+        <p><strong>Vikram Nama Samvatsaram:</strong> {{ suryaSiddhantaDate.year }}</p>
+        <p><strong>Ugadi Calendar:</strong></p>
+        <p>Year: {{ ugadiDate.year }}</p>
+        <p>Year Name: {{ ugadiDate.yearName }}</p>
+        <p>Vaaram: {{ ugadiDate.vaaram }} ({{ ugadiDate.vaaramEnglish }})</p>
+        <p>Tithi: {{ ugadiDate.tithi }}</p>
+        <p>Paksha: {{ ugadiDate.paksha }}</p>
+        <p>Masa: {{ ugadiDate.masa }}</p>
+        <p>Nakshatra: {{ ugadiDate.nakshatra }}</p>
+        <p>Rahu Time: {{ ugadiDate.rahuTime }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-box" #infoBox [class.visible]="isInfoBoxVisible" *ngIf="selectedTargetDetails">
     <button class="close-btn" (click)="closeInfoBox()">✖</button>
     <div class="info-content">
       <h2>{{ selectedTargetDetails.general.name }} Details</h2>
+
+      <div class="info-section">
+        <h3>Indian Names</h3>
+        <p><strong>Sanskrit:</strong> {{ selectedTargetDetails.general.sanskritName }}</p>
+        <p><strong>Telugu:</strong> {{ selectedTargetDetails.general.teluguName }}</p>
+      </div>
+
       <div class="info-section">
         <h3>General Information</h3>
         <p><strong>Name:</strong> {{ selectedTargetDetails.general.name }}</p>
         <p><strong>Type:</strong> {{ selectedTargetDetails.general.type }}</p>
         <p><strong>Classification:</strong> {{ selectedTargetDetails.general.classification }}</p>
       </div>
+
+      <div class="info-section">
+        <h3>Vedic Significance</h3>
+        <p>{{ selectedTargetDetails.general.significance }}</p>
+      </div>
+
+      <div class="info-section">
+        <h3>Benefits</h3>
+        <p>{{ selectedTargetDetails.general.benefits }}</p>
+      </div>
+
+      <div class="info-section">
+        <h3>Uses in Astrology</h3>
+        <p>{{ selectedTargetDetails.general.uses }}</p>
+      </div>
+
+      <div class="info-section">
+        <h3>Vedic Shloka</h3>
+        <div class="shloka-container">
+          <div class="shloka-section">
+            <h4>Sanskrit</h4>
+            <p class="shloka sanskrit">{{ selectedTargetDetails.general.shloka.sanskrit }}</p>
+          </div>
+          <div class="shloka-section">
+            <h4>Telugu</h4>
+            <p class="shloka telugu">{{ selectedTargetDetails.general.shloka.telugu }}</p>
+          </div>
+          <div class="shloka-section">
+            <h4>English Translation</h4>
+            <p class="shloka english">{{ selectedTargetDetails.general.shloka.english }}</p>
+          </div>
+        </div>
+      </div>
+
       <div class="info-section">
         <h3>Physical Characteristics</h3>
         <p><strong>Diameter:</strong> {{ selectedTargetDetails.physical.diameter }}</p>
