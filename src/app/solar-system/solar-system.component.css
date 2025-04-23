@@ -26,6 +26,8 @@
 @media (max-width: 768px) {
   .progress-bar {
     width: 80%;
+    left: 10%;
+    right: 10%;
   }
 }
 
@@ -270,8 +272,9 @@ canvas {
   .toggle-btn { font-size: 16px; }
   .control-box, .info-box, .calendar-card {
     width: 80%;
-    left: 5%;
-    right: 5%;
+    left: 10%;
+    right: 10%;
+    padding: 20px;
   }
   .info-box {
     top: 80%;
