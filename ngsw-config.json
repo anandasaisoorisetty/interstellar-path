@@ -13,21 +13,18 @@
           "/*.js",
           "/favicon.ico",
           "/assets/favicon-16x16.webp",
-          "/assets/favicon-32x32.webp",
-          "/assets/apple-touch-icon.webp",
-          "/assets/android-chrome-192x192.webp",
-          "/assets/android-chrome-512x512.webp"
+          "/assets/favicon-32x32.webp"
         ]
       }
     },
     {
       "name": "assets",
       "installMode": "lazy",
-      "updateMode": "prefetch",
+      "updateMode": "lazy",
       "resources": {
         "files": [
-          "/assets/**",
-          "/*.(svg|cur|jpg|jpeg|png|apng|webp|avif|gif|otf|ttf|woff|woff2)"
+          "/assets/*.webp",
+          "/assets/*.webmanifest"
         ]
       }
     }
@@ -40,8 +37,8 @@
       ],
       "cacheConfig": {
         "strategy": "performance",
-        "maxSize": 50,
-        "maxAge": "1d"
+        "maxSize": 20,
+        "maxAge": "12h"
       }
     }
   ]
