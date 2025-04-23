@@ -15,7 +15,7 @@
   <link rel="icon" type="image/png" sizes="192x192" href="/assets/android-chrome-192x192.png">
   <link rel="icon" type="image/png" sizes="512x512" href="/assets/android-chrome-512x512.png">
   <!-- Manifest -->
-  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="manifest" href="/assets/manifest.webmanifest">
   <meta name="theme-color" content="#1976d2">
   <meta name="description" content="Explore our solar system in 3D with Interstellar Path">
   <!-- iOS -->
@@ -36,8 +36,8 @@
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/ngsw-worker.js').then(registration => {
-          console.log('ServiceWorker registration successful');
+        navigator.serviceWorker.register('/ngsw-worker.js', { scope: '/' }).then(registration => {
+          console.log('ServiceWorker registration successful with scope: ', registration.scope);
         }).catch(err => {
           console.log('ServiceWorker registration failed: ', err);
         });

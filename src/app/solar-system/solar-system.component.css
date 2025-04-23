@@ -23,6 +23,12 @@
   margin-top: 20px;
 }
 
+@media (max-width: 768px) {
+  .progress-bar {
+    width: 80%;
+  }
+}
+
 .progress {
   height: 100%;
   background: #FFC107;
