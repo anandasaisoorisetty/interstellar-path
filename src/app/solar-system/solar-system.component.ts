@@ -57,6 +57,7 @@ export class SolarSystemComponent implements AfterViewInit {
   private infoBoxY = 0;
   isCalendarVisible = false;
   private calendarCard: HTMLElement | null = null;
+  isQuoteVisible = false;
 
   private targetDetails: { [key: string]: any } = {
     'Sun': {
@@ -830,5 +831,9 @@ export class SolarSystemComponent implements AfterViewInit {
         this.toggleCalendar();
       }
     }
+  }
+
+  toggleQuote() {
+    this.isQuoteVisible = !this.isQuoteVisible;
   }
 }
