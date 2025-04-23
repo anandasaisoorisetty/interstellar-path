@@ -69,12 +69,15 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "buildTarget": "interstellar-path:build:development"
+          },
           "configurations": {
             "production": {
-              "browserTarget": "interstellar-path:build:production"
+              "buildTarget": "interstellar-path:build:production"
             },
             "development": {
-              "browserTarget": "interstellar-path:build:development"
+              "buildTarget": "interstellar-path:build:development"
             }
           },
           "defaultConfiguration": "development"

@@ -1,60 +1,137 @@
-# SolarSystem
+# Interstellar Path
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.5.
+A 3D interactive visualization of our solar system, built with Angular and Three.js. This Progressive Web App (PWA) allows users to explore the solar system in an immersive way, with detailed information about each celestial body.
 
-## Development server
+## 🌟 Features
 
-To start a local development server, run:
+- **3D Solar System Visualization**
+  - Realistic planet sizes and orbits
+  - Interactive camera controls
+  - Toggleable orbital paths and moons
+  - Smooth animations and transitions
 
+- **Planetary Information**
+  - Detailed facts about each planet
+  - Physical characteristics
+  - Orbital data
+  - Atmospheric composition
+  - Temperature ranges
+
+- **Cultural Integration**
+  - Sanskrit and Telugu names for celestial bodies
+  - Vedic significance and benefits
+  - Traditional shlokas (verses)
+  - Cultural context and uses
+
+- **User Interface**
+  - Responsive design for all devices
+  - Intuitive controls
+  - Information panels
+  - Calendar integration
+  - Inspirational quotes
+
+## 📱 Progressive Web App (PWA) Features
+
+- **Installable**
+  - Add to home screen on Android and iOS
+  - Works offline after first visit
+  - App-like experience
+
+- **Performance**
+  - Fast loading times
+  - Smooth animations
+  - Optimized assets
+  - Service worker caching
+
+- **Cross-Platform**
+  - Works on mobile and desktop
+  - Responsive design
+  - Touch and mouse controls
+  - Adaptive layouts
+
+## 🚀 Technical Stack
+
+- **Frontend**
+  - Angular 19
+  - Three.js for 3D rendering
+  - TypeScript
+  - SCSS/CSS
+
+- **PWA Implementation**
+  - Service Worker
+  - Web Manifest
+  - Cache strategies
+  - Offline support
+
+## 🛠️ Development
+
+### Prerequisites
+- Node.js (v20 or higher)
+- npm (v9 or higher)
+- Angular CLI
+
+### Installation
 ```bash
+# Clone the repository
+git clone [repository-url]
+
+# Install dependencies
+npm install
+
+# Start development server
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
+### Building for Production
 ```bash
-ng generate component component-name
+# Build with PWA support
+ng build --configuration=production
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## 📦 Deployment
 
+The application is built for production using:
 ```bash
-ng generate --help
+ng build --configuration=production
 ```
 
-## Building
+The output will be in the `dist/interstellar-path` directory, ready for deployment to any static hosting service.
 
-To build the project run:
+## 🌐 Browser Support
 
-```bash
-ng build
-```
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
+- Mobile browsers (Chrome, Safari)
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## 📱 Mobile Experience
 
-## Running unit tests
+- Optimized for touch interactions
+- Responsive layouts
+- Adaptive controls
+- PWA installation support
+- Offline functionality
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## 🔧 PWA Configuration
 
-```bash
-ng test
-```
+The PWA features are configured through:
+- `ngsw-config.json` - Service worker configuration
+- `manifest.webmanifest` - Web app manifest
+- Angular service worker module
 
-## Running end-to-end tests
+## 📜 License
 
-For end-to-end (e2e) testing, run:
+[Your License Here]
 
-```bash
-ng e2e
-```
+## 👥 Contributing
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-## Additional Resources
+## 📞 Support
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
-# interstellar-path
+For support, please [create an issue](issues-url) in the repository.
+
+---
+
+Made with ❤️ using Angular and Three.js

@@ -92,6 +92,7 @@ canvas {
   scrollbar-color: #FFC107 rgba(0, 0, 0, 0.2);
   cursor: move;
   user-select: none;
+  z-index: 1002;
 }
 
 .info-box.visible { display: block; }
@@ -264,22 +265,17 @@ canvas {
 @media (max-width: 768px) {
   .toggle-btn { font-size: 16px; }
   .control-box, .info-box, .calendar-card {
-    width: 80%;
-    left: 10%;
-    right: 10%;
-    padding: 20px;
-  }
-
-  .control-box{
     width: 75%;
     left: 12.5%;
     right: 12.5%;
+    padding: 20px;
   }
-  
   .info-box {
     top: 80%;
-    height: 180px;
+    height: 280px;
     transform: translateY(-50%);
+    z-index: 1003;
+    padding: 10px;
   }
   .control-box.visible, .info-box.visible { display: block; }
   .checkboxes { flex-direction: column; gap: 10px; }
@@ -508,6 +504,22 @@ canvas {
   background: rgba(0, 0, 0, 0.9);
   padding: 10px 0;
   margin-top: -20px;
+  z-index: 1;
+}
+
+.quote-box .close-btn {
+  position: sticky;
+  top: 0;
+  right: 0;
+  float: right;
+  background: none;
+  border: none;
+  color: #FFC107;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 2;
+  padding: 0;
+  margin: -10px -10px 0 0;
 }
 
 .quote-content {
