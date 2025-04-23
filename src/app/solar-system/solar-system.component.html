@@ -12,6 +12,13 @@
 <canvas #solarCanvas></canvas>
 @if (isLoaded) {
   <button class="toggle-btn" (click)="toggleControlBox()" [class.hidden]="isControlBoxVisible && isDesktop()">☰</button>
+  <button class="calendar-btn" (click)="toggleCalendar()">
+    <svg class="calendar-icon" viewBox="0 0 24 24" width="20" height="20">
+      <path fill="currentColor" d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM5 8V6h14v2H5zm2 4h10v2H7v-2zm0 4h7v2H7v-2z"/>
+    </svg>
+    Calendar
+  </button>
+
   <div class="control-box" [class.visible]="isControlBoxVisible">
     <h2>Interstellar Path</h2>
     <button class="close-btn" (click)="toggleControlBox()" *ngIf="isDesktop()">✖</button>
@@ -46,13 +53,6 @@
           </optgroup>
         </select>
       </div>
-
-      <button class="calendar-btn" (click)="toggleCalendar()">
-        <svg class="calendar-icon" viewBox="0 0 24 24" width="20" height="20">
-          <path fill="currentColor" d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM5 8V6h14v2H5zm2 4h10v2H7v-2zm0 4h7v2H7v-2z"/>
-        </svg>
-        Calendar
-      </button>
     </div>
 
     <div class="scrollable-section">
